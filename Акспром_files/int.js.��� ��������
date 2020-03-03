@@ -1,0 +1,35 @@
+﻿/* File Created: июля 22, 2012 */
+$(document).ready(function () 
+{
+
+	$('#thumbs ul li a').hover(
+		function () {
+			var currentBigImage = $('#bigpic img').attr('src');
+			var newBigImage = $(this).attr('href');
+			var currentThumbSrc = $(this).attr('rel');
+			var newTitle = $(this).attr('title');
+			switchImage(newBigImage, currentBigImage, currentThumbSrc, newTitle);
+		},
+		function () { }
+	);
+
+
+
+		function switchImage(imageHref, currentBigImage, currentThumbSrc, title) {
+
+		var theBigImage = $('#bigpic img');
+		var theBigA = $('#bigpic a');
+
+		if (imageHref != currentBigImage) {
+
+			theBigImage.fadeOut(250, function () {
+				theBigImage.attr('src', imageHref).fadeIn(250);
+				theBigImage.attr('title', title)
+				theBigA.attr('href', imageHref);
+
+				var newImageDesc = $("#thumbs ul li a img[src='" + currentThumbSrc + "']").attr('alt');
+				$('p#desc').empty().html(newImageDesc);
+			});
+		}
+	}
+});
